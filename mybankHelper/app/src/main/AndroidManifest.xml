@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.android.alipayhook">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:name=".CustomApplcation"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <service android:name=".DaemonService"
+            android:enabled="true"
+            android:exported="false"
+          />
+        <meta-data
+            android:name="xposedmodule"
+            android:value="true" />
+        <!-- 模块描述 -->
+        <meta-data
+            android:name="xposeddescription"
+            android:value="网商银行监听" />
+        <!-- 最低版本号 -->
+        <meta-data
+            android:name="xposedminversion"
+            android:value="54" />
+        <receiver
+            android:name=".receiver.Receiver1"
+            android:process=":daemon_service" />
+        <receiver
+            android:name=".receiver.Receiver3"
+            android:process=":daemon_service" >
+            <intent-filter>
+                <action android:name="com.tools.beat"></action>
+            </intent-filter>
+        </receiver>
+        <service
+            android:name=".receiver.Service2"
+            android:process=":process2" />
+
+        <receiver
+            android:name=".receiver.Receiver2"
+            android:process=":process2"  >
+        </receiver>
+    </application>
+
+</manifest>

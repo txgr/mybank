@@ -1,0 +1,29 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.android.qqpay"
+        minSdkVersion 16
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    compileOnly files('src/main/java/libs/XposedBridgeApi-54.jar');
+    implementation project(path: ':libmarsdaemon')
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.alibaba:fastjson:1.2.51'
+    implementation 'org.xutils:xutils:3.5.0'
+}
